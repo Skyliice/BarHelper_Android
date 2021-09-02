@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BarHelper_Android.Views;assembly=BarHelper_Android"
+             x:Class="BarHelper_Android.Views.MainPage"
+             NavBarIsVisible="False">
+    <TabBar>
+        <Tab Title="Drinktionary" Icon="ic_action_list_alt.png">
+            <ShellContent Title="Drinktionary" ContentTemplate="{DataTemplate local:DrinktionaryView}"></ShellContent>
+        </Tab>
+        <Tab Title="Search" Icon="ic_action_search.png">
+            <ShellContent Title="Search" ContentTemplate="{DataTemplate local:SearchView}"></ShellContent>
+        </Tab>
+        <Tab Title="Add Drink" Icon="ic_action_post_add.png">
+            <ShellContent Title="Add Drink"  ContentTemplate="{DataTemplate local:AddDrinkView}"></ShellContent>
+        </Tab>
+        <Tab Title="Add Liq" Icon="ic_action_playlist_add.png">
+            <ShellContent Title="Add Liq"  ContentTemplate="{DataTemplate local:AddLiqView}"></ShellContent>
+        </Tab>
+    </TabBar>
+
+</Shell>
