@@ -2,12 +2,33 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="http://xamarin.com/schemas/2020/toolkit"
              x:Class="BarHelper_Android.Views.DrinktionaryView">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Hello, world!"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ListView BackgroundColor="Transparent" SelectionMode="None" ItemsSource="{Binding Drinks}" HasUnevenRows="True">
+        <ListView.Behaviors>
+            <converters:EventToCommandBehavior EventName="ItemTapped" Command="{Binding TappedItem}" EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}">
+            </converters:EventToCommandBehavior>
+        </ListView.Behaviors>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid Padding="10">
+                        <Frame CornerRadius="20" HasShadow="True">
+                            <StackLayout Orientation="Horizontal">
+                                <Frame x:Name="ImageFrame" CornerRadius="20" HeightRequest="80" Padding="0" WidthRequest="80">
+                                    <Image Source="{Binding Image}" Aspect="Fill"></Image>
+                                </Frame>
+                                <Label Text="{Binding Name}" FontSize="18" VerticalOptions="Center"></Label>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>

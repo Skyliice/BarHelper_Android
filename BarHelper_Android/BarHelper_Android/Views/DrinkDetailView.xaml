@@ -2,12 +2,43 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BarHelper_Android.Views.DrinkDetailView">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Hello, world!"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+             x:Class="BarHelper_Android.Views.DrinkDetailView" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button HeightRequest="55" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="55" Text="Back" Command="{Binding BtnBackCommand}"></Button>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label FontSize="20" Text="{Binding CurrentDrink.Name}" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+            <Frame Margin="0,0,10,0" Grid.Column="1" Padding="0" CornerRadius="20" HeightRequest="200" WidthRequest="200" VerticalOptions="Center" HorizontalOptions="Center">
+                <Image Aspect="Fill" Source="{Binding CurrentDrink.Image}"></Image>
+            </Frame>
+        </Grid>
+        <StackLayout Orientation="Vertical" Grid.Row="2">
+            <Label Text="Components" FontSize="20" HorizontalOptions="Center"></Label>
+            <Frame HorizontalOptions="Center" Margin="20" CornerRadius="20">
+                <ListView ItemsSource="{Binding CurrentDrink.Recipe}" SelectionMode="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Margin="10,0,0,0" VerticalOptions="Center" Orientation="Horizontal">
+                                    <Label FontSize="16" Text="{Binding Name}"></Label>
+                                    <Label FontSize="16" Text=" - "></Label>
+                                    <Label FontSize="16" Text="{Binding Amount}"></Label>
+                                    <Label FontSize="16" Text=" ml"></Label>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+            <Label FontSize="20" HorizontalOptions="Center" Margin="10,0,10,30" HorizontalTextAlignment="Center" VerticalOptions="Center" Text="{Binding CurrentDrink.Description}"></Label>
         </StackLayout>
-    </ContentPage.Content>
+    </Grid>
 </ContentPage>
