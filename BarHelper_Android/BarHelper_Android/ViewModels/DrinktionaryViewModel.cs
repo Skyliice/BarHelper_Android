@@ -1,5 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using BarHelper_Android.Models;
 using BarHelper_Android.Views;
 using Xamarin.CommunityToolkit.ObjectModel;
@@ -7,11 +12,25 @@ using Xamarin.Forms;
 
 namespace BarHelper_Android.ViewModels
 {
-    public class DrinktionaryViewModel
+    public class DrinktionaryViewModel : INotifyPropertyChanged
     {
-        public List<Drink> Drinks { get; set; }
+        private List<Drink> _allDrinks { get; set; }
+        private List<Drink> _drinks { get; set; }
+
+        public List<Drink> Drinks
+        {
+            get => _drinks;
+            set
+            {
+                _drinks = value;
+                OnPropertyChanged("Drinks");
+            }
+        }
+
+        public string SearchString { get; set; }
         
         public IAsyncCommand<Drink> TappedItem { get; protected set; }
+        public ICommand SearchCommand { get; protected set; }
         private IGatherable _gatherer;
         public INavigation Navigation;
 
@@ -22,9 +41,29 @@ namespace BarHelper_Android.ViewModels
         public DrinktionaryViewModel()
         {
             TappedItem = new AsyncCommand<Drink>(DrinkClicked);
+            SearchString=String.Empty;
+            SearchCommand = new Command(SearchDrinks);
             _gatherer = new ApiGatherer();
+            _allDrinks = new List<Drink>();
             Drinks = new List<Drink>();
-            Drinks = Task.Run(() => _gatherer.GetAllDrinks()).Result;
+            _allDrinks = Task.Run(() => _gatherer.GetAllDrinks()).Result;
+            Drinks = _allDrinks;
+        }
+
+        private void SearchDrinks()
+        {
+            if (SearchString == String.Empty)
+                Drinks = _allDrinks;
+            var temprecords =
+                _allDrinks.Where(c => c.Name.ToLower().Contains(SearchString.ToLower()) | c.Description.ToLower().Contains(SearchString.ToLower())).ToList();
+            Drinks = temprecords;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

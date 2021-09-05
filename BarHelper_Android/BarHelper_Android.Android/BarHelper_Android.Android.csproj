@@ -71,6 +71,7 @@
     </ItemGroup>
     <ItemGroup>
         <AndroidResource Include="Resources\drawable\bh_icon.png" />
+        <AndroidResource Include="Resources\drawable\ic_action_arrow_back.png" />
         <AndroidResource Include="Resources\drawable\ic_action_list_alt.png">
           <SubType>Designer</SubType>
           <Generator>MSBuild:UpdateGeneratedFiles</Generator>

@@ -3,32 +3,47 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:barHelperAndroid="clr-namespace:BarHelper_Android;assembly=BarHelper_Android"
              x:Class="BarHelper_Android.Views.DrinktionaryView">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ListView BackgroundColor="Transparent" SelectionMode="None" ItemsSource="{Binding Drinks}" HasUnevenRows="True">
-        <ListView.Behaviors>
-            <converters:EventToCommandBehavior EventName="ItemTapped" Command="{Binding TappedItem}" EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}">
-            </converters:EventToCommandBehavior>
-        </ListView.Behaviors>
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <Grid Padding="10">
-                        <Frame CornerRadius="20" HasShadow="True">
-                            <StackLayout Orientation="Horizontal">
-                                <Frame x:Name="ImageFrame" CornerRadius="20" HeightRequest="80" Padding="0" WidthRequest="80">
-                                    <Image Source="{Binding Image}" Aspect="Fill"></Image>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#141f4e"  Offset="0.2"/>
+                <GradientStop Color="#8d5797" Offset="0.8"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <SearchBar PlaceholderColor="White" TextColor="White" SearchCommand="{Binding SearchCommand}" CancelButtonColor="White" Text="{Binding SearchString, Mode=TwoWay}" Placeholder="Name search"></SearchBar>
+            <ListView Grid.Row="1" SeparatorVisibility="None"  SelectionMode="None" ItemsSource="{Binding Drinks}" HasUnevenRows="True">
+                <ListView.Behaviors>
+                    <converters:EventToCommandBehavior EventName="ItemTapped" Command="{Binding TappedItem}" EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}">
+                    </converters:EventToCommandBehavior>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Frame BackgroundColor="#2b1046" CornerRadius="20" BorderColor="White" HasShadow="True">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Frame x:Name="ImageFrame" CornerRadius="20" HeightRequest="80" Padding="0" WidthRequest="80">
+                                            <Image Source="{Binding Image}" Aspect="Fill"></Image>
+                                        </Frame>
+                                        <Label Text="{Binding Name}" TextColor="White" FontSize="18" VerticalOptions="Center"></Label>
+                                    </StackLayout>
                                 </Frame>
-                                <Label Text="{Binding Name}" FontSize="18" VerticalOptions="Center"></Label>
-                            </StackLayout>
-                        </Frame>
-                    </Grid>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    
 </ContentPage>
