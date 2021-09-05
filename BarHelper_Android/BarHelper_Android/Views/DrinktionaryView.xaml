@@ -21,7 +21,11 @@
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <SearchBar PlaceholderColor="White" TextColor="White" SearchCommand="{Binding SearchCommand}" CancelButtonColor="White" Text="{Binding SearchString, Mode=TwoWay}" Placeholder="Name search"></SearchBar>
+        <SearchBar PlaceholderColor="White" TextColor="White" SearchCommand="{Binding SearchCommand}" CancelButtonColor="White" Text="{Binding SearchString, Mode=TwoWay}" Placeholder="Name search">
+            <SearchBar.Behaviors>
+                <converters:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchCommand}"></converters:EventToCommandBehavior>
+            </SearchBar.Behaviors>
+        </SearchBar>
             <ListView Grid.Row="1" SeparatorVisibility="None"  SelectionMode="None" ItemsSource="{Binding Drinks}" HasUnevenRows="True">
                 <ListView.Behaviors>
                     <converters:EventToCommandBehavior EventName="ItemTapped" Command="{Binding TappedItem}" EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}">
