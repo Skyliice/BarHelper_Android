@@ -20,7 +20,8 @@ namespace BarHelper_Android.ViewModels
         {
             CurrentDrink = chosenDrink;
             _gatherer = new ApiGatherer();
-            var lst = Task.Run(() => _gatherer.GetAllComponents()).Result;
+            var dsource = DataSource.getInstance();
+            var lst = dsource.GetComponents();
             CurrentDrink.Recipe.ForEach(i=>i.Name=lst.Select(o=>o).First(x => x.ID==i.ID).Name);
             BtnBackCommand = new Command(BtnBackPressed);
         }

@@ -68,8 +68,8 @@ namespace BarHelper_Android.ViewModels
             RemoveComponentTapped = new AsyncCommand<Component>(RemoveComponent);
             SearchCommand = new Command(CommandSearch);
             _allComponents = new ObservableCollection<Component>();
-            _gatherable = new ApiGatherer();
-            var templst = Task.Run(() => _gatherable.GetAllComponents()).Result.OrderBy(o=>o.Name);
+            var dsource = DataSource.getInstance();
+            var templst = dsource.GetComponents().OrderBy(o=>o.Name);
             foreach (var component in templst)
             {
                 _allComponents.Add(component);

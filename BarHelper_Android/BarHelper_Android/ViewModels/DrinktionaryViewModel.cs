@@ -42,20 +42,14 @@ namespace BarHelper_Android.ViewModels
         }
         public DrinktionaryViewModel()
         {
-            /*_localImages = new string[] {"1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png", "8.png"};*/
             TappedItem = new AsyncCommand<Drink>(DrinkClicked);
             SearchString=String.Empty;
             SearchCommand = new Command(SearchDrinks);
-            _gatherer = new ApiGatherer();
             _allDrinks = new List<Drink>();
             Drinks = new List<Drink>();
-            _allDrinks = Task.Run(() => _gatherer.GetAllDrinks()).Result;
-            /*var rnd = new Random();
-            foreach (var drink in _allDrinks)
-            {
-                if (drink.Image == String.Empty)
-                    drink.Image = _localImages[rnd.Next(0,_localImages.Length-1)];
-            }*/
+            var dsource = DataSource.getInstance();
+            dsource.SetValues();
+            _allDrinks = dsource.GetDrinks();
             Drinks = _allDrinks;
         }
 

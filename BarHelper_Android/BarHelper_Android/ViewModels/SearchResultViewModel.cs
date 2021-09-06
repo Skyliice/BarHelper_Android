@@ -54,7 +54,8 @@ namespace BarHelper_Android.ViewModels
             _selectedComponents = selectedComponents;
             _componentsquan = componentsquan;
             BtnBackCommand = new Command(BtnBackPressed);
-            var temprecords = Task.Run(() => _gatherer.GetAllDrinks()).Result;
+            var dsource = DataSource.getInstance();
+            var temprecords = dsource.GetDrinks();
             _allDrinks = new ObservableCollection<Drink>(temprecords);
             SelectAllAvailableRecipes();
             if (Drinks.Count == 0)
