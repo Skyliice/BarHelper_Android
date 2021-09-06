@@ -2,12 +2,49 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BarHelper_Android.Views.DrinkDetailView">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Hello, world!"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+             x:Class="BarHelper_Android.Views.DrinkDetailView" >
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#141f4e"  Offset="0.2"/>
+                <GradientStop Color="#8d5797" Offset="0.8"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <ImageButton BackgroundColor="Transparent" Source="ic_action_arrow_back.png" HeightRequest="35" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="55" Command="{Binding BtnBackCommand}"></ImageButton>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label TextColor="White" HorizontalTextAlignment="Center" FontSize="20" Text="{Binding CurrentDrink.Name}" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+            <Frame Margin="0,0,10,0" Grid.Column="1" Padding="0" CornerRadius="20" HeightRequest="200" WidthRequest="200" VerticalOptions="Center" HorizontalOptions="Center">
+                <Image Aspect="Fill" Source="{Binding CurrentDrink.Image}"></Image>
+            </Frame>
+        </Grid>
+        <StackLayout  Orientation="Vertical" Grid.Row="2">
+            <Label TextColor="White" Text="Components" FontSize="20" HorizontalOptions="Center"></Label>
+            <Frame BackgroundColor="#2b1046" BorderColor="White" HorizontalOptions="Center" Margin="20" CornerRadius="20">
+                <ListView ItemsSource="{Binding CurrentDrink.Recipe}" SeparatorColor="White" SelectionMode="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Margin="10,0,0,0" VerticalOptions="Center" Orientation="Horizontal">
+                                    <Label FontSize="16" TextColor="White" Text="{Binding Name}"></Label>
+                                    <Label FontSize="16" TextColor="White" Text=" - "></Label>
+                                    <Label FontSize="16" TextColor="White" Text="{Binding Amount}"></Label>
+                                    <Label FontSize="16" TextColor="White" Text=" ml"></Label>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+            <Label TextColor="White" FontSize="20" HorizontalOptions="Center" Margin="10,0,10,30" HorizontalTextAlignment="Center" VerticalOptions="Center" Text="{Binding CurrentDrink.Description}"></Label>
         </StackLayout>
-    </ContentPage.Content>
+    </Grid>
 </ContentPage>
