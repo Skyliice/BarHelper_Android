@@ -23,7 +23,6 @@ namespace BarHelper_Android.ViewModels
             var lst = Task.Run(() => _gatherer.GetAllComponents()).Result;
             CurrentDrink.Recipe.ForEach(i=>i.Name=lst.Select(o=>o).First(x => x.ID==i.ID).Name);
             BtnBackCommand = new Command(BtnBackPressed);
-            
         }
 
         private async void BtnBackPressed()
