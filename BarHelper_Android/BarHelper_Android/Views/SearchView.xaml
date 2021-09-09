@@ -65,13 +65,13 @@
                 </StackLayout>
                 <Slider Value="{Binding SliderValue}" Minimum="0" ThumbColor="White" MinimumTrackColor="#6CAD0E" Maximum="10" Margin="15,0,15,20">
                 </Slider>
-                <Grid HeightRequest="150">
+                <Grid HeightRequest="250">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Command="{Binding ResetCommand}" Text="Reset" ></Button>
-                    <Button Grid.Column="1" Text="Mix" Command="{Binding MixCommand}"></Button>
+                    <Button Grid.Column="0" Margin="0,10" BackgroundColor="Black" Opacity="0.5" TextColor="White" CornerRadius="20" BorderColor="White" BorderWidth="1" Command="{Binding ResetCommand}" Text="Reset" ></Button>
+                    <Button Grid.Column="1" Margin="0, 10" BackgroundColor="Black" Opacity="0.5" TextColor="White" CornerRadius="20" BorderColor="White" BorderWidth="1" Text="Mix" Command="{Binding MixCommand}"></Button>
                 </Grid>
             </StackLayout>
         </Grid>

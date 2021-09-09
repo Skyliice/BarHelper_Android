@@ -26,7 +26,7 @@
                 <converters:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchCommand}"></converters:EventToCommandBehavior>
             </SearchBar.Behaviors>
         </SearchBar>
-            <ListView Grid.Row="1" SeparatorVisibility="None"  SelectionMode="None" ItemsSource="{Binding Drinks}" HasUnevenRows="True">
+            <ListView Grid.Row="1" CachingStrategy="RecycleElementAndDataTemplate" SeparatorVisibility="None"  SelectionMode="None" ItemsSource="{Binding Drinks}" HasUnevenRows="True">
                 <ListView.Behaviors>
                     <converters:EventToCommandBehavior EventName="ItemTapped" Command="{Binding TappedItem}" EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}">
                     </converters:EventToCommandBehavior>

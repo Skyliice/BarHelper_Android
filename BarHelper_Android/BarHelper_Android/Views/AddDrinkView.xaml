@@ -3,11 +3,48 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BarHelper_Android.Views.AddDrinkView">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Hello, world 2!"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#141f4e"  Offset="0.2"/>
+                <GradientStop Color="#8d5797" Offset="0.8"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" Command="{Binding ResetCommand}" BackgroundColor="Black" Opacity="0.5" TextColor="White" CornerRadius="20" BorderColor="White" BorderWidth="1" HorizontalOptions="Start" Margin="10" WidthRequest="150" Text="Reset"></Button>
+        <Button Grid.Row="0" Command="{Binding NextCommand}" BackgroundColor="Black" Opacity="0.5" TextColor="White" CornerRadius="20" BorderColor="White" BorderWidth="1" HorizontalOptions="End" Margin="10" WidthRequest="150" Text="Next"></Button>
+        <StackLayout Grid.Row="1" Orientation="Vertical">
+            <Label HorizontalOptions="Center" TextColor="White" Text="Title" FontSize="20"></Label>
+            <Frame Opacity="0.5" CornerRadius="30" Margin="20,0" BackgroundColor="Black" Padding="5">
+                <Entry Placeholder="Drink name" Text="{Binding DrinkName}" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
+            </Frame>
+            <Label HorizontalOptions="Center" TextColor="White" Text="Description" FontSize="20"></Label>
+            <Frame BackgroundColor="Black" Opacity="0.5" CornerRadius="30" Margin="20,0">
+                <Editor TextColor="White" Text="{Binding DrinkDescription}" Placeholder="Description" PlaceholderColor="Gray" HeightRequest="150" Margin="20,0"></Editor>
+            </Frame>
         </StackLayout>
-    </ContentPage.Content>
+        <StackLayout Grid.Row="2" Orientation="Vertical">
+            <Label TextColor="White" HorizontalOptions="Center" FontSize="20" Text="Image"></Label>
+            <Frame Opacity="0.5" CornerRadius="30" Margin="20,0" BackgroundColor="Black" Padding="5">
+                <Entry Placeholder="Image link" IsEnabled="{Binding IsInternetSource}" Text="{Binding DrinkImageLink}" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
+            </Frame>
+            <Grid Margin="0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackLayout Orientation="Vertical">
+                    <Label TextColor="White" FontSize="20" Text="Or" HorizontalOptions="Center"></Label>
+                    <Button Command="{Binding UploadCommand}" HorizontalOptions="Center" BackgroundColor="Black" Opacity="0.5" TextColor="White" CornerRadius="20" BorderColor="White" BorderWidth="1" WidthRequest="200" Margin="20,0" Text="Upload from gallery" ></Button>
+                </StackLayout>
+                <Frame Grid.Column="1" Margin="20,15" CornerRadius="20" HeightRequest="150" Padding="0" WidthRequest="80" BorderColor="Black" BackgroundColor="Transparent">
+                    <Image Source="{Binding DrinkImageLink}" HorizontalOptions="Center" Aspect="AspectFill"></Image>
+                </Frame>
+            </Grid>
+        </StackLayout>
+    </Grid>
 </ContentPage>

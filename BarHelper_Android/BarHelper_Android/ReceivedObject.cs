@@ -6,5 +6,7 @@ namespace BarHelper_Android
     {
         [JsonProperty(propertyName:"mess")]
         public int Mess { get; set; }
+        [JsonProperty(PropertyName = "link")]
+        public string Link { get; set; }
     }
 }

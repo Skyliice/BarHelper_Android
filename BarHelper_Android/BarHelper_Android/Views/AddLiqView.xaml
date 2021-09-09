@@ -13,7 +13,7 @@
         </Grid.Background>
         <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center" Margin="20,0">
             <Label Text="Enter the name of a Liq" TextColor="White" HorizontalTextAlignment="Center" FontSize="24"></Label>
-            <ListView VerticalOptions="Center"  ItemsSource="{Binding Components}" SeparatorVisibility="None" Opacity="0.5" VerticalScrollBarVisibility="Never" HorizontalOptions="Center" HeightRequest="100">
+            <ListView VerticalOptions="Center" SelectionMode="None"  ItemsSource="{Binding Components}" SeparatorVisibility="None" Opacity="0.5" VerticalScrollBarVisibility="Never" HorizontalOptions="Center" HeightRequest="100">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -32,8 +32,8 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Text="Reset" Command="{Binding ResetButtonCommand}"></Button>
-                <Button Grid.Column="1" Text="Create" Command="{Binding CreateButtonCommand}"></Button>
+                <Button BackgroundColor="Black" Opacity="0.5" TextColor="White" CornerRadius="20" BorderColor="White" BorderWidth="1" Text="Reset" Command="{Binding ResetButtonCommand}"></Button>
+                <Button Grid.Column="1" BackgroundColor="Black" Opacity="0.5" TextColor="White" CornerRadius="20" BorderColor="White" BorderWidth="1" Text="Create" Command="{Binding CreateButtonCommand}"></Button>
             </Grid>
         </StackLayout>
     </Grid>

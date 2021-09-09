@@ -36,6 +36,11 @@ namespace BarHelper_Android
             return _sender.AddLiq(name).Result;
         }
 
+        public bool AddDrink(Drink newDrink,bool isImagefromInternet)
+        {
+            return _sender.AddDrink(newDrink,isImagefromInternet).Result;
+        }
+
         public List<Component> GetComponents()
         {
             return instance.Components;
