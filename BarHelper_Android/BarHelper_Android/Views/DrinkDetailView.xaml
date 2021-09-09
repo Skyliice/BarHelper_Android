@@ -28,7 +28,7 @@
         </Grid>
         <StackLayout  Orientation="Vertical" Grid.Row="2">
             <Label TextColor="White" Text="Components" FontSize="20" HorizontalOptions="Center"></Label>
-            <Frame BackgroundColor="#2b1046" BorderColor="White" HorizontalOptions="Center" Margin="20" CornerRadius="20">
+            <Frame BackgroundColor="Black" Opacity="0.5" BorderColor="White" HorizontalOptions="Center" Margin="20" CornerRadius="20">
                 <ListView ItemsSource="{Binding CurrentDrink.Recipe}" SeparatorColor="White" SelectionMode="None">
                     <ListView.ItemTemplate>
                         <DataTemplate>

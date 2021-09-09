@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="BarHelper_Android.Views.AddDrinkRecipeView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <behaviors:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#141f4e"  Offset="0.2"/>
+                    <GradientStop Color="#8d5797" Offset="0.8"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Button Grid.Row="0" Command="{Binding BackCommand}" BackgroundColor="Black" Opacity="0.5" TextColor="White" CornerRadius="20" BorderColor="White" BorderWidth="1" HorizontalOptions="Start" Margin="10" WidthRequest="150" Text="Back"></Button>
+            <Button Grid.Row="0" Command="{Binding NextCommand}" BackgroundColor="Black" Opacity="0.5" TextColor="White" CornerRadius="20" BorderColor="White" BorderWidth="1" HorizontalOptions="End" Margin="10" WidthRequest="150" Text="Next"></Button>
+            <SearchBar Grid.Row="1" PlaceholderColor="White" TextColor="White" SearchCommand="{Binding SearchCommand}" CancelButtonColor="White" Text="{Binding SearchString, Mode=TwoWay}" Placeholder="Component search">
+                <SearchBar.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchCommand}"></behaviors:EventToCommandBehavior>
+                </SearchBar.Behaviors>
+            </SearchBar>
+            <StackLayout Grid.Row="2" Margin="0, 10">
+                <Frame BackgroundColor="Transparent" Margin="10" Padding="0" HeightRequest="500">
+                    <ListView ItemsSource="{Binding Components}" SelectionMode="None" SeparatorColor="White">
+                        <ListView.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ComponentTapped}" EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}">
+                            </behaviors:EventToCommandBehavior>
+                        </ListView.Behaviors>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Label TextColor="White" Text="{Binding Name}" FontSize="16" HorizontalTextAlignment="Center" VerticalOptions="Center"></Label>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
+                <Label TextColor="White" Text="Selected components:" FontSize="18" HorizontalOptions="Center"></Label>
+                <Frame BackgroundColor="Transparent" Margin="10" Padding="0" HeightRequest="500">
+                    <ListView ItemsSource="{Binding Recipe}" SelectionMode="None" SeparatorColor="White">
+                        <ListView.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectedComponentTapped}" EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}">
+                            </behaviors:EventToCommandBehavior>
+                        </ListView.Behaviors>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label TextColor="White" FontSize="16" VerticalOptions="Center" Text="{Binding Name}"></Label>
+                                        <Label TextColor="White" FontSize="16" VerticalOptions="Center" Text=" - "></Label>
+                                        <Label TextColor="White" FontSize="16" VerticalOptions="Center" Text="{Binding Amount}"></Label>
+                                        <Label TextColor="White" FontSize="16" VerticalOptions="Center" Text=" ml"></Label>
+                                    </StackLayout>                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
+                <StackLayout Orientation="Horizontal" Margin="20,5">
+                    <Label TextColor="White" FontSize="16" Text="Selected component: "></Label>
+                    <Label TextColor="White" FontSize="16" Text="{Binding SelectedComponent.Name}"></Label>
+                </StackLayout>
+                <Grid HeightRequest="130">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Frame Grid.Column="0" Opacity="0.5" CornerRadius="20" Margin="10,0,0,0" BackgroundColor="Black" Padding="5">
+                        <Entry Placeholder="Amount" Text="{Binding SelectedComponent.Amount}" Keyboard="Numeric" PlaceholderColor="Gray" TextColor="White" Margin="20,0">
+                            <Entry.Behaviors>
+                                <behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding AmountChangedCommand}">
+                                </behaviors:EventToCommandBehavior>
+                            </Entry.Behaviors>
+                        </Entry>
+                    </Frame>
+                    <Button Grid.Column="1" Command="{Binding RemoveCommand}" HorizontalOptions="Center" BackgroundColor="Black" Opacity="0.5" TextColor="White" CornerRadius="20" BorderColor="White" BorderWidth="1" WidthRequest="150" Margin="20,0" Text="Remove" ></Button>
+                </Grid>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

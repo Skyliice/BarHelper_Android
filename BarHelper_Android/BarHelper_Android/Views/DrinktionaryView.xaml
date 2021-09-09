@@ -26,7 +26,7 @@
                 <converters:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchCommand}"></converters:EventToCommandBehavior>
             </SearchBar.Behaviors>
         </SearchBar>
-            <ListView Grid.Row="1" SeparatorVisibility="None"  SelectionMode="None" ItemsSource="{Binding Drinks}" HasUnevenRows="True">
+            <ListView Grid.Row="1" CachingStrategy="RecycleElementAndDataTemplate" IsPullToRefreshEnabled="True" RefreshAllowed="True" IsRefreshing="{Binding IsRefreshing}" RefreshCommand="{Binding RefreshListCommand}" SeparatorVisibility="None"  SelectionMode="None" ItemsSource="{Binding Drinks}" HasUnevenRows="True">
                 <ListView.Behaviors>
                     <converters:EventToCommandBehavior EventName="ItemTapped" Command="{Binding TappedItem}" EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}">
                     </converters:EventToCommandBehavior>
@@ -35,7 +35,13 @@
                     <DataTemplate>
                         <ViewCell>
                             <Grid Padding="10">
-                                <Frame BackgroundColor="#2b1046" CornerRadius="20" BorderColor="White" HasShadow="True">
+                                <Frame CornerRadius="20" BorderColor="White" HasShadow="True">
+                                    <Frame.Background>
+                                        <LinearGradientBrush>
+                                            <GradientStop Color="#141f4e"  Offset="0.3"/>
+                                            <GradientStop Color="#8d5797" Offset="0.8"/>
+                                        </LinearGradientBrush>
+                                    </Frame.Background>
                                     <StackLayout Orientation="Horizontal">
                                         <Frame x:Name="ImageFrame" CornerRadius="20" HeightRequest="80" Padding="0" WidthRequest="80">
                                             <Image Source="{Binding Image}" Aspect="Fill"></Image>
