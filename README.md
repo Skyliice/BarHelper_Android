@@ -1,5 +1,6 @@
 # BarHelper_Android
 ## Small dictionary for drinks and cocktails, add your own recipes and search through them with ease!
+## This is the android version of BarHelper. To see the IOS version click <a href="https://github.com/vladukhaDog/BarHelper">here</a>.
 ## API
 
 
@@ -28,12 +29,12 @@
 
 List | Details
 ------------ | -------------
-![GitHub Logo](/Images/Drinktionary.JPG) | ![GitHub Logo](/Images/DetailView.jpg)
+![GitHub Logo](https://github.com/Skyliice/BarHelper_Android/blob/master/Images/Drinktionary.jpg) | ![GitHub Logo](https://github.com/Skyliice/BarHelper_Android/blob/master/Images/DetailView.jpg)
 
 #### Advanced search, look cocktail with specific components in them or choose all your components at hand and the app will show you what you can do with them, additionaly you can choose up to how many components in a cocktail you are searching.
 <p float="left">
-  <img src="/Images/SearchComponent.jpg" width="300" />
-  <img src="/Images/SearchDrink.jpg" width="300" /> 
+  <img src="https://github.com/Skyliice/BarHelper_Android/blob/master/Images/SearchComponent.jpg" width="300" />
+  <img src="https://github.com/Skyliice/BarHelper_Android/blob/master/Images/SearchDrink.jpg" width="300" /> 
 </p>
 
 
@@ -42,27 +43,27 @@ List | Details
 #### Upload an image from gallery or write down url of an image if its already somewhere online
 
 <p float="left">
-  <img src="/Images/CreateDrink.jpg" width="300" />
+  <img src="https://github.com/Skyliice/BarHelper_Android/blob/master/Images/CreateDrink.jpg" width="300" />
 </p>
 
 #### Write down the recipe with exact amount of each component
 
 <p float="left">
-  <img src="/Images/CreateDrinkComponents.jpg" width="300" />
+  <img src="https://github.com/Skyliice/BarHelper_Android/blob/master/Images/CreateDrinkComponents.jpg" width="300" />
 </p>
 
 
 #### Check all the information and upload it to the database!
 
 <p float="left">
-  <img src="/Images/CreateDrinkFinish.jpg" width="300" />
+  <img src="https://github.com/Skyliice/BarHelper_Android/blob/master/Images/CreateDrinkFinish.jpg" width="300" />
 </p>
 
 
 #### And dont forget that you can add components to the list with ease.
 
 <p float="left">
-  <img src="/Images/CreateLiq.jpg" width="300" />
+  <img src="https://github.com/Skyliice/BarHelper_Android/blob/master/Images/CreateLiq.jpg" width="300" />
 </p>
 
 
