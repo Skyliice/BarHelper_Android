@@ -42,7 +42,7 @@
                     <Button Command="{Binding UploadCommand}" HorizontalOptions="Center" BackgroundColor="Black" Opacity="0.5" TextColor="White" CornerRadius="20" BorderColor="White" BorderWidth="1" WidthRequest="200" Margin="20,0" Text="Upload from gallery" ></Button>
                 </StackLayout>
                 <Frame Grid.Column="1" Margin="20,15" CornerRadius="20" HeightRequest="150" Padding="0" WidthRequest="80" BorderColor="Black" BackgroundColor="Transparent">
-                    <Image Source="{Binding DrinkImageLink}" HorizontalOptions="Center" Aspect="AspectFill"></Image>
+                    <Image Source="{Binding DrinkImageLink}" Aspect="Fill"></Image>
                 </Frame>
             </Grid>
         </StackLayout>

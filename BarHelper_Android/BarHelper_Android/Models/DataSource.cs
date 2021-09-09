@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BarHelper_Android.Models;
+using Xamarin.Essentials;
 
 namespace BarHelper_Android
 {
@@ -29,6 +30,15 @@ namespace BarHelper_Android
         public List<Drink> GetDrinks()
         {
             return instance.Drinks;
+        }
+
+        public bool CheckConnection()
+        {
+            var current = Connectivity.NetworkAccess;
+            if (current == NetworkAccess.Internet)
+                return true;
+            else
+                return false;
         }
 
         public bool AddLiq(string name)

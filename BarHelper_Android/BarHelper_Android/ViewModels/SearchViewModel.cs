@@ -15,9 +15,6 @@ namespace BarHelper_Android.ViewModels
 {
     public class SearchViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<Component> _allComponents { get; set; }
-        private ObservableCollection<Component> _components { get; set; }
-
         public ObservableCollection<Component> Components
         {
             get => _components;
@@ -27,8 +24,6 @@ namespace BarHelper_Android.ViewModels
                 OnPropertyChanged("Components");
             }
         }
-
-        private ObservableCollection<Component> _selectedComponents { get; set; }
         public ObservableCollection<Component> SelectedComponents
         {
             get => _selectedComponents;
@@ -38,13 +33,6 @@ namespace BarHelper_Android.ViewModels
                 OnPropertyChanged("SelectedComponents");
             } 
         }
-        public IAsyncCommand<Component> ComponentTapped { get; protected set; }
-        public ICommand ResetCommand { get; protected set; }
-        public IAsyncCommand MixCommand { get; protected set; }
-        public INavigation Navigation;
-        public IAsyncCommand<Component> RemoveComponentTapped { get; protected set; }
-
-        private int _sliderValue;
         public int SliderValue
         {
             get => _sliderValue;
@@ -54,19 +42,29 @@ namespace BarHelper_Android.ViewModels
                 if (_sliderValue < 1)
                     _sliderValue = 1;
                 OnPropertyChanged("SliderValue");
-            } }
+            } 
+        }
+        public string SearchString { get; set; }
+        
+        private int _sliderValue;
+        private ObservableCollection<Component> _allComponents { get; set; }
+        private ObservableCollection<Component> _components { get; set; }
+        private ObservableCollection<Component> _selectedComponents { get; set; }
+        public IAsyncCommand<Component> ComponentTapped { get; protected set; }
+        public ICommand ResetCommand { get; protected set; }
+        public IAsyncCommand MixCommand { get; protected set; }
+        public INavigation Navigation;
+        public IAsyncCommand<Component> RemoveComponentTapped { get; protected set; }
         public ICommand SearchCommand { get; protected set; }
         private IGatherable _gatherable;
-        public string SearchString { get; set; }
-
         public SearchViewModel()
         {
             ComponentTapped = new AsyncCommand<Component>(TappedComponent);
             MixCommand = new AsyncCommand(MixButtonPressed);
             ResetCommand = new Command(ResetRecipe);
-            SliderValue = 1;
             RemoveComponentTapped = new AsyncCommand<Component>(RemoveComponent);
             SearchCommand = new Command(CommandSearch);
+            SliderValue = 1;
             _allComponents = new ObservableCollection<Component>();
             var dsource = DataSource.getInstance();
             var templst = dsource.GetComponents().OrderBy(o=>o.Name);
@@ -78,6 +76,13 @@ namespace BarHelper_Android.ViewModels
             Components = _allComponents;
         }
 
+        private async Task TappedComponent(Component selectedComponent)
+        {
+            SelectedComponents.Add(selectedComponent);
+            _allComponents.Remove(selectedComponent);
+            Components.Remove(selectedComponent);
+        }
+        
         private async Task MixButtonPressed()
         {
             if (SelectedComponents.Count == 0)
@@ -107,13 +112,6 @@ namespace BarHelper_Android.ViewModels
             var temprecords = Components.Where(o => o.Name.ToLower().Contains(SearchString.ToLower()));
             var tempcollection = new ObservableCollection<Component>(temprecords);
             Components = tempcollection;
-        }
-
-        private async Task TappedComponent(Component selectedComponent)
-        {
-            SelectedComponents.Add(selectedComponent);
-            _allComponents.Remove(selectedComponent);
-            Components.Remove(selectedComponent);
         }
 
         private async Task RemoveComponent(Component selectedComponent)

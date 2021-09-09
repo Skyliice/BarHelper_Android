@@ -13,8 +13,24 @@ namespace BarHelper_Android.ViewModels
 {
     public class AddDrinkViewModel : INotifyPropertyChanged
     {
-        public string DrinkName { get; set; }
-        public string DrinkDescription { get; set; }
+        public string DrinkName
+        {
+            get => _drinkName;
+            set
+            {
+                _drinkName = value;
+                OnPropertyChanged("DrinkName");
+            } 
+        }
+        public string DrinkDescription
+        {
+            get => _drinkDescription;
+            set
+            {
+                _drinkDescription = value;
+                OnPropertyChanged("DrinkDescription");
+            } 
+        }
         public string DrinkImageLink
         {
             get => _drinkImageLink;
@@ -34,15 +50,16 @@ namespace BarHelper_Android.ViewModels
                 OnPropertyChanged("IsInternetSource");
             }
         }
-
-        public INavigation Navigation { get; set; }
-
+        
         private string _drinkImageLink;
+        private string _drinkName;
+        private string _drinkDescription;
         private bool _isInternetSource;
         
         public ICommand ResetCommand { get; protected set; }
         public ICommand NextCommand { get; protected set; }
         public ICommand UploadCommand { get; protected set; }
+        public INavigation Navigation { get; set; }
 
         public AddDrinkViewModel()
         {
@@ -63,6 +80,11 @@ namespace BarHelper_Android.ViewModels
 
         private async void NextView()
         {
+            if (string.IsNullOrEmpty(DrinkName))
+            {
+                DependencyService.Get<IMessage>().ShortAlert("Please enter the name of the drink first");
+                return;
+            }
             var newDrink = new Drink() {Name = DrinkName, Description = DrinkDescription, Image = DrinkImageLink};
             await Navigation.PushAsync(new AddDrinkRecipeView(newDrink,IsInternetSource));
         }
@@ -78,7 +100,7 @@ namespace BarHelper_Android.ViewModels
 
             var mediaOptions = new PickMediaOptions()
             {
-                PhotoSize = PhotoSize.Medium
+                PhotoSize = PhotoSize.Full
             };
             try
             {
@@ -90,8 +112,6 @@ namespace BarHelper_Android.ViewModels
             {
                 return;
             }
-            
-            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

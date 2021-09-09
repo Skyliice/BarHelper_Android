@@ -15,11 +15,6 @@ namespace BarHelper_Android.ViewModels
 {
     public class SearchResultViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<Component> _selectedComponents { get; set; }
-        private ObservableCollection<Drink> _allDrinks;
-        private ObservableCollection<Drink> _drinks;
-
-        private bool isNoContent;
         public bool IsNoContent
         {
             get => isNoContent;
@@ -38,22 +33,27 @@ namespace BarHelper_Android.ViewModels
                 OnPropertyChanged("Drinks");
             }
         }
+        public string SearchString { get; set; }
 
+        private ObservableCollection<Component> _selectedComponents { get; set; }
+        private ObservableCollection<Drink> _allDrinks;
+        private ObservableCollection<Drink> _drinks;
+        private bool isNoContent;
         private int _componentsquan;
-        public INavigation Navigation;
         private IGatherable _gatherer;
+        
+        public INavigation Navigation;
         public ICommand SearchCommand { get; protected set; }
         public IAsyncCommand<Drink> TappedItem { get; protected set; }
         public ICommand BtnBackCommand { get; protected set; }
         public SearchResultViewModel(ObservableCollection<Component> selectedComponents, int componentsquan)
         {
-            _gatherer = new ApiGatherer();
-            SearchString=String.Empty;
-            SearchCommand = new Command(SearchDrinks);
-            TappedItem = new AsyncCommand<Drink>(DrinkClicked);
             _selectedComponents = selectedComponents;
             _componentsquan = componentsquan;
+            SearchCommand = new Command(SearchDrinks);
+            TappedItem = new AsyncCommand<Drink>(DrinkClicked);
             BtnBackCommand = new Command(BtnBackPressed);
+            SearchString=String.Empty;
             var dsource = DataSource.getInstance();
             var temprecords = dsource.GetDrinks();
             _allDrinks = new ObservableCollection<Drink>(temprecords);
@@ -73,13 +73,14 @@ namespace BarHelper_Android.ViewModels
             Drinks = new ObservableCollection<Drink>(temprecords);
         }
 
-        public string SearchString { get; set; }
-
         private async Task DrinkClicked(Drink clickedDrink)
         {
             await Navigation.PushAsync(new DrinkDetailView(clickedDrink));
         }
-
+        private async void BtnBackPressed()
+        {
+            await Navigation.PopAsync();
+        }
         private void SelectAllAvailableRecipes()
         {
             Drinks = new ObservableCollection<Drink>();
@@ -90,12 +91,6 @@ namespace BarHelper_Android.ViewModels
             }
             _allDrinks = Drinks;
         }
-
-        private async void BtnBackPressed()
-        {
-            await Navigation.PopAsync();
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

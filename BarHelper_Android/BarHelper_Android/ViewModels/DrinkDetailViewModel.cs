@@ -11,10 +11,10 @@ namespace BarHelper_Android.ViewModels
     public class DrinkDetailViewModel
     {
         public Drink CurrentDrink { get; set; }
-        public INavigation Navigation;
-
         public List<Component> Recipe { get; set; }
+        
         private IGatherable _gatherer;
+        public INavigation Navigation;
         public ICommand BtnBackCommand { get; protected set; }
         public DrinkDetailViewModel(Drink chosenDrink)
         {

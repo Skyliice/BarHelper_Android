@@ -27,7 +27,7 @@
                     <Editor Text="{Binding NewDrink.Description}" HeightRequest="150" TextColor="White" HorizontalOptions="Center" IsReadOnly="True"></Editor>
                     <Label FontSize="20" TextColor="White" Text="Image" HorizontalTextAlignment="Center"/>
                     <Frame Margin="20,15" CornerRadius="20" HeightRequest="150" Padding="0" HorizontalOptions="Center" BorderColor="Black" BackgroundColor="Transparent">
-                        <Image Source="{Binding NewDrink.Image}" HorizontalOptions="Center" Aspect="Fill"></Image>
+                        <Image Source="{Binding NewDrink.Image}" Aspect="Fill"></Image>
                     </Frame>
                     <Label FontSize="20" TextColor="White" Text="Components" HorizontalTextAlignment="Center"/>
                     <Frame BackgroundColor="Transparent" Margin="10" Padding="0">

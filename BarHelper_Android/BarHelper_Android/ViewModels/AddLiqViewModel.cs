@@ -12,7 +12,6 @@ namespace BarHelper_Android.ViewModels
 {
     public class AddLiqViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<Component> _components;
         public ObservableCollection<Component> Components
         {
             get => _components;
@@ -22,8 +21,6 @@ namespace BarHelper_Android.ViewModels
                 OnPropertyChanged("Components");
             }
         }
-
-        private string _componentName;
         public string ComponentName
         {
             get => _componentName;
@@ -33,11 +30,14 @@ namespace BarHelper_Android.ViewModels
                 OnPropertyChanged("ComponentName");
             }
         }
+        
+        private ObservableCollection<Component> _allComponents { get; set; }
+        private ObservableCollection<Component> _components;
+        private string _componentName;
 
         public ICommand ComponentNameChanged { get; protected set; }
         public ICommand ResetButtonCommand { get; protected set; }
         public ICommand CreateButtonCommand { get; protected set; }
-        private ObservableCollection<Component> _allComponents { get; set; }
 
         public AddLiqViewModel()
         {
@@ -52,6 +52,17 @@ namespace BarHelper_Android.ViewModels
             {
                 _allComponents.Add(component);
             }   
+        }
+        
+        private void ChangeComponentName()
+        {
+            if (ComponentName == String.Empty)
+            {
+                Components.Clear();
+                return;
+            }
+            var tempcollection = _allComponents.Where(o => o.Name.ToLower().Contains(ComponentName.ToLower()));
+            Components = new ObservableCollection<Component>(tempcollection);
         }
 
         private void CreateLiq()
@@ -80,17 +91,6 @@ namespace BarHelper_Android.ViewModels
         {
             ComponentName=String.Empty;
             Components.Clear();
-        }
-        private void ChangeComponentName()
-        {
-            if (ComponentName == String.Empty)
-            {
-                Components.Clear();
-                return;
-            }
-            var tempcollection = _allComponents.Where(o => o.Name.ToLower().Contains(ComponentName.ToLower()));
-            Components = new ObservableCollection<Component>(tempcollection);
-            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

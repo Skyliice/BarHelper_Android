@@ -55,7 +55,6 @@ namespace BarHelper_Android.ViewModels
         }
 
         private ObservableCollection<Component> _allComponents;
-
         private ObservableCollection<Component> _components;
         private ObservableCollection<Liq> _recipe;
         private Liq _selectecComponent;

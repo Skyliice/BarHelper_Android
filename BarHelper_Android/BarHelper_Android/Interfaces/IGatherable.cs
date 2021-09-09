@@ -8,6 +8,5 @@ namespace BarHelper_Android
     {
         public Task<List<Drink>> GetAllDrinks();
         public Task<List<Component>> GetAllComponents();
-        
     }
 }
